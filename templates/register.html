@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input {
+            margin: 5px;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .home-btn {
+            background-color: #28a745;
+            margin-top: 10px;
+        }
+        .home-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register Your Vehicle</h2>
+        <form method="POST">
+            <input type="text" name="regNo" placeholder="Vehicle Reg No" required>
+            <input type="text" name="owner" placeholder="Owner Name" required>
+            <input type="text" name="insurance_upto" placeholder="Insurance Expiry (DD MM YYYY)" required>
+            <input type="text" name="pucc_upto" placeholder="PUC Expiry (DD MM YYYY)" required>
+            <input type="text" name="fitness_upto" placeholder="Fitness Expiry (DD MM YYYY)" required>
+            <input type="text" name="contact" placeholder="Contact Number" required>
+            <button type="submit">Register</button>
+        </form>
+        {% if qr_code %}
+            <h3>QR Code Generated</h3>
+            <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
+            <br>
+        {% endif %}
+        <button class="home-btn" onclick="window.location.href='/'">Home</button>
+    </div>
+</body>
+</html>

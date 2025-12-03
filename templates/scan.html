@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+</head>
+<body>
+
+    <h2>Scan QR Code</h2>
+    <input type="text" id="qrInput" placeholder="Scan QR Code Here">
+    <button id="scanBtn">Submit</button>
+
+    <script>
+        document.getElementById("scanBtn").addEventListener("click", function() {
+            let qrData = document.getElementById("qrInput").value;
+    
+            // Extract vehicle number using regex (assuming it's at the start)
+            let vehicleNumberMatch = qrData.match(/[A-Z]{2}\d{2}[A-Z]{2}\d{4}/);  
+            let vehicleNumber = vehicleNumberMatch ? vehicleNumberMatch[0] : "";
+    
+            if (!vehicleNumber) {
+                alert("Invalid QR Code! No vehicle number found.");
+                return;
+            }
+    
+            fetch("/scan_qr", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "qr_data=" + encodeURIComponent(vehicleNumber)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+    
+
+</body>
+</html>

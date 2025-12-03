@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registration Validator</title>
+    <script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js" defer></script>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://media.gettyimages.com/id/182475239/photo/turnpike-toll.jpg?s=612x612&w=0&k=20&c=nWrZZdMf-u6PL7vJqUsqynOpMfQVRJzCv-S2tubwcZg=') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            line-height: 1.6;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        h1 {
+            color: #ffcc00;
+            font-size: 32px;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ffcc00;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: background 0.3s ease;
+        }
+
+        .scan-btn {
+            background-color: #17a2b8;
+        }
+
+        .register-btn {
+            background-color: #ffcc00;
+            color: #333;
+        }
+
+        .vehicle-details {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #ffcc00;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #ffcc00;
+            color: black;
+        }
+
+        .warning {
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #qr-reader {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>Vehicle Insurance and PUC</h1>
+
+        <form action="/" method="POST">
+            <label for="regInput">Enter Vehicle Registration Number</label>
+            <input type="text" id="regInput" name="regNo" placeholder="e.g., AB12CD3456" required>
+            <button type="submit">Validate</button>
+        </form>
+
+        <button class="scan-btn" onclick="startScanner()">📷 Scan QR Code</button>
+        <button class="register-btn" onclick="window.location.href='/register'">📝 Register</button>
+    </div>
+    
+    <div id="qr-reader"></div>
+
+    <script>
+        function startScanner() {
+            document.getElementById("qr-reader").style.display = "block";
+            const html5QrCode = new Html5Qrcode("qr-reader");
+
+            html5QrCode.start(
+                { facingMode: "environment" }, 
+                { fps: 10, qrbox: 250 },
+                (decodedText) => {
+                    document.getElementById("regInput").value = decodedText;
+                    html5QrCode.stop().then(() => {
+                        document.getElementById("qr-reader").style.display = "none";
+                    }).catch(err => console.log("Error stopping scanner: ", err));
+                },
+                (errorMessage) => {
+                    console.log(errorMessage);
+                }
+            ).catch((err) => {
+                console.error("QR Scanner Error: ", err);
+            });
+        }
+    </script>
+
+    {% if vehicle %}
+    <div class="vehicle-details">
+        <h3>Vehicle Details</h3>
+        <table>
+            {% for key, value in vehicle.items() %}
+            <tr>
+                <th>{{ key.replace('_', ' ').upper() }}</th>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Document Status</h3>
+        {% if insurance_warning %}
+        <div class="warning">{{ insurance_warning }}</div>
+        {% endif %}
+        {% if puc_warning %}
+        <div class="warning">{{ puc_warning }}</div>
+        {% endif %}
+        {% if fitness_warning %}
+        <div class="warning">{{ fitness_warning }}</div>
+        {% endif %}
+    </div>
+    {% else %}
+        <p>Vehicle not found. Please register your vehicle.</p>
+    {% endif %}
+</body>
+</html>
