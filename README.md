@@ -70,13 +70,11 @@ This project focuses on automating the verification of vehicle insurance, pollut
 - Integrate with cloud services for large-scale deployment.
 - Develop a mobile application for real-time monitoring by authorities.
 
-## Contributors
-- **Your Name**: [Kirtika Sharma](https://github.com/kirtika45)
-- **Teammate Name**: [Sai Teja](https://github.com/Saikukatla)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 Feel free to contribute to the project or raise issues for further improvement!
+
 
