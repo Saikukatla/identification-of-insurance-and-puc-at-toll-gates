@@ -41,7 +41,7 @@ This project focuses on automating the verification of vehicle insurance, pollut
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/kirtika45/capstone.git
+ (https://github.com/Saikukatla/identification-of-insurance-and-puc-at-toll-gates.git)
    ```
 2. Navigate to the project directory:
    ```bash
@@ -76,5 +76,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 Feel free to contribute to the project or raise issues for further improvement!
+
 
 
