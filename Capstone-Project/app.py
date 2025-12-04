@@ -43,9 +43,9 @@ def validate_date(date_str):
         return None
 
 # Twilio credentials (ensure these are securely stored)
-TWILIO_ACCOUNT_SID = "ACa9872491f78295de78a7f680cf89ab62"
-TWILIO_AUTH_TOKEN = "66c106058f7921d31b502b70575ad93b"
-TWILIO_PHONE_NUMBER = "+12315383763"
+TWILIO_ACCOUNT_SID = ""
+TWILIO_AUTH_TOKEN = ""
+TWILIO_PHONE_NUMBER = ""
 
 # Function to send SMS alerts
 def send_alert_message(contact_number, message):
@@ -141,3 +141,4 @@ def scan_qr():
 # Run Flask app
 if __name__ == "__main__":
     app.run(debug=True)
+
