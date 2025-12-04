@@ -2,7 +2,7 @@
 <h2>Identification of Vehicle Insurance and Pollution Certificate Validity at Toll Gates</h2>
 
 ## Overview
-This project focuses on automating the verification of vehicle insurance, pollution certificates and fitness check at toll gates using RFID-based FASTag technology and Electronic Product Code (EPC). The system aims to streamline toll operations and ensure compliance with regulatory requirements for vehicles.
+This project focuses on automating the verification of vehicle insurance, pollution certificates and fitness check at toll gates using RFID-based FASTag technology and Electronic Product Code (EPC)[...]
 
 ## Objectives
 - Automate the verification process for vehicle insurance and pollution certificates.
@@ -41,7 +41,7 @@ This project focuses on automating the verification of vehicle insurance, pollut
 ## Installation
 1. Clone the repository:
    ```bash
- (https://github.com/Saikukatla/identification-of-insurance-and-puc-at-toll-gates.git)
+   git clone https://github.com/Saikukatla/identification-of-insurance-and-puc-at-toll-gates.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -76,6 +76,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 Feel free to contribute to the project or raise issues for further improvement!
-
-
-
